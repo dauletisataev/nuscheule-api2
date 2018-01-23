@@ -117,8 +117,8 @@ function saveToDatabase(id, subjects, res){
 
                 dataRef.child(id).child(key).child(child[0]).set(subject).then(function onSuccess(response){
                 		oauth2Client = new OAuth2(
-					    "254360189613-e44vjen3av1is52jbvli3suiireibr37.apps.googleusercontent.com",
-					    "FWXWeiiIgdw0BNEmOMw0TvHE",
+					    "254360189613-45ht6gm997e5lqk4dsqjpdme4egteugv.apps.googleusercontent.com",
+					    "0yUUlzpngIlspfwLyUcwCmIU",
 					    "https://nuschedule.herokuapp.com/callback/"+id+"/"
 					);
 					var url = oauth2Client.generateAuthUrl({
