@@ -1,0 +1,21 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.file-form{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #eee;
+  border: 2px dashed #ccc;
+}
+.file-form input{
+  margin: 10px;
+}

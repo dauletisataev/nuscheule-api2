@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel='stylesheet' href='/styles/style.css' />
+    <link rel="stylesheet" href="/styles/bootstrap.css" />
+</head>
+<body ng-controller="main">
+    <div class="content" ng-controller="main">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 file-form">
+                    <form action="/upload/" enctype="multipart/form-data" method="post">
+                        <input type="file" name="file" id="file"/>
+                        <!-- <input class="btn btn-primary" ng-click="fileSubmit()"  type="submit" value="submit"/> -->
+                        <input class="btn btn-primary"    type="submit" value="submit"/>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <script src="/js/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="/js/ng-file-upload.min.js"></script>
+    <script src="/controllers/controller.js"></script>
+</body>
+</html>
