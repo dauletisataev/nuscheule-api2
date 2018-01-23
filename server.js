@@ -119,7 +119,7 @@ function saveToDatabase(id, subjects, res){
                 		oauth2Client = new OAuth2(
 					    "254360189613-45ht6gm997e5lqk4dsqjpdme4egteugv.apps.googleusercontent.com",
 					    "0yUUlzpngIlspfwLyUcwCmIU",
-					    "https://nuschedule.herokuapp.com/callback?id="+id
+					    "https://nuschedule.herokuapp.com/callback"
 					);
 					var url = oauth2Client.generateAuthUrl({
 					    // 'online' (default) or 'offline' (gets refresh_token)
