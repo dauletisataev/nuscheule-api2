@@ -72,8 +72,8 @@ app.get("/callback/:id", function(req, res) {
         if (!err) {
         	console.log("callback request indicated");
             oauth2Client.setCredentials(tokens);
-            console.log(req.params.id);
-            addToCalendar(req.params.id);
+            console.log(req.query.id);
+            addToCalendar(req.query.id);
             console.log("skipped");
         }
     });
@@ -119,7 +119,7 @@ function saveToDatabase(id, subjects, res){
                 		oauth2Client = new OAuth2(
 					    "254360189613-45ht6gm997e5lqk4dsqjpdme4egteugv.apps.googleusercontent.com",
 					    "0yUUlzpngIlspfwLyUcwCmIU",
-					    "https://nuschedule.herokuapp.com/callback/"+id+"/"
+					    "https://nuschedule.herokuapp.com/callback?id="+id+"/"
 					);
 					var url = oauth2Client.generateAuthUrl({
 					    // 'online' (default) or 'offline' (gets refresh_token)
