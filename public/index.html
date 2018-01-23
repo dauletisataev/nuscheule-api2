@@ -5,20 +5,28 @@
     <title>Title</title>
     <link rel='stylesheet' href='/styles/style.css' />
     <link rel="stylesheet" href="/styles/bootstrap.css" />
+    <link rel="shortcut icon" href="imgs/icon.png" type="image/x-icon">
 </head>
 <body ng-controller="main">
     <div class="content" ng-controller="main">
         <div class="container">
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4 file-form">
-                    <form action="/upload/" enctype="multipart/form-data" method="post">
+                <div class="col-md-2"></div>
+                <div class="col-md-8 ">
+                    <form class="file-form" action="/upload/" enctype="multipart/form-data" method="post">
                         <input type="file" name="file" id="file"/>
                         <!-- <input class="btn btn-primary" ng-click="fileSubmit()"  type="submit" value="submit"/> -->
                         <input class="btn btn-primary"    type="submit" value="submit"/>
                     </form>
+                    <div id="guide">
+                        <h3>Quick Guide</h3>
+                        <h4>1. Download <span style="font-weight: bold">Personal Schedule</span> (not table) from <a target="_blank" href="https://registrar.nu.edu.kz/my-registrar/personal-schedule">registrar</a></h4> 
+                        <img class="img-responsive"   id="img" src="imgs/download.png" alt="">
+                        <h4>2. Attach the downloaded file and sign up.</h4> 
+                    </div>
+                    
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                 </div>
             </div>
         </div>

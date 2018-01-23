@@ -40,8 +40,9 @@ var oauth2Client;
 app.post('/upload', function(req, res) {
 	console.log("Post request detected...");
 	if(req.files){
-		var file = req.files.file,
-		filename = req.files.file.name,
+		var file = req.files.file;
+		if(!file) {res.sendFile(path.join(__dirname+'/public/invalid-file.html')); return};
+		var filename = req.files.file.name,
 		type = req.files.file.mimetype;
 		var dir = './public/uploads/'+makeid()+"-"+filename;
 		if(type.indexOf("pdf")>-1){
@@ -54,10 +55,10 @@ app.post('/upload', function(req, res) {
 				}
 			});
 		}else{
-			res.send("invalid file format");
+			res.sendFile(path.join(__dirname+'/public/invalid-file.html'));
 		}
 		
-	}; 
+	}
 
 });
 
