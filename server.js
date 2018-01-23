@@ -14,6 +14,13 @@ var google = require('googleapis'),
 app.use(upload()); 
 app.use(express.static(__dirname+'/public')); 
 
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
+ 
+
+
 var config = {
     apiKey: "AIzaSyD2eu56B1z124GGhDXqAhedlD9T2fC9S34",
     authDomain: "nu-schedule.firebaseapp.com",
@@ -66,15 +73,14 @@ app.get("/oAuthUrl", function(req, res) {
    res.send(url);
 });
 
-app.get("/callback/:id", function(req, res) {
+app.get("/callback", function(req, res) {
     oauth2Client.getToken(req.query.code, function (err, tokens) {
         // Now tokens contains an access_token and an optional refresh_token. Save them.
         if (!err) {
         	console.log("callback request indicated");
             oauth2Client.setCredentials(tokens);
-            console.log(req.query.id);
-            addToCalendar(req.query.id);
-            console.log("skipped");
+            console.log("current id= "+localStorage.getItem('id'));
+            addToCalendar(localStorage.getItem('id'));
         }
     });
     res.sendFile(path.join(__dirname+'/public/thank.html'));
@@ -116,11 +122,12 @@ function saveToDatabase(id, subjects, res){
                 }
 
                 dataRef.child(id).child(key).child(child[0]).set(subject).then(function onSuccess(response){
-                		oauth2Client = new OAuth2(
+                	oauth2Client = new OAuth2(
 					    "254360189613-45ht6gm997e5lqk4dsqjpdme4egteugv.apps.googleusercontent.com",
 					    "0yUUlzpngIlspfwLyUcwCmIU",
-					    "https://nuschedule.herokuapp.com/callback"
+					    "http://localhost:3000/callback"
 					);
+                	localStorage.setItem('id', id);
 					var url = oauth2Client.generateAuthUrl({
 					    // 'online' (default) or 'offline' (gets refresh_token)
 					    access_type: 'offline',
@@ -146,9 +153,10 @@ function addToCalendar(id){
     var dataRef = firebase.database().ref().child("/").child(id);
     console.log("wait bro starting to add...");
     dataRef.once('value', function(snapshot){
-    	console.log("got the data");
+    	console.log("got the data mann");
         snapshot.forEach(function(childSnap){
            childSnap.forEach(function(snap){
+           	console.log("looping through mann");
                var subject = snap.val();
                //console.log(getFormattedTime(subject.startTime, childSnap.key));
                console.log(subject.startTime, childSnap.key);
@@ -165,7 +173,7 @@ function addToCalendar(id){
                        'timeZone': 'UTC+06:00'
                    },
                    'recurrence': [
-                       'RRULE:FREQ=WEEKLY;COUNT=2'
+                       'RRULE:FREQ=WEEKLY;COUNT=12'
                    ],
                    'reminders': {
                        'useDefault': true
@@ -177,6 +185,7 @@ function addToCalendar(id){
                    calendarId: 'primary',
                    resource: event,
                }, function(err, event) {
+               		console.log('finished');
                    if (err) {
                        console.log('There was an error contacting the Calendar service: ' + err);
                        return;
