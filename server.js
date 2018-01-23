@@ -164,7 +164,7 @@ function addToCalendar(id){
                var event = {
                    'summary': subject.title,
                    'location': subject.room,
-                   'description': 'go hard or go home',
+                   'description': subject.instructor,
                    'start': {
                        'dateTime': getFormattedTime(subject.startTime, childSnap.key),
                        'timeZone': 'GMT+06:00'
