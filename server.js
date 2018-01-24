@@ -95,7 +95,7 @@ app.get("/getSchedule/:id", function(req, res){
 	});
 
 });
-function saveToDatabase(id, subjects, res){
+function saveToDatabase(id, subjects, res, dir){
     var dataRef = firebase.database().ref().child("/");
 
 
@@ -129,6 +129,7 @@ function saveToDatabase(id, subjects, res){
 					    "https://nuschedule.herokuapp.com/callback"
 					);
                 	localStorage.setItem('id', id);
+                	fs.unlinkSync(dir);
 					var url = oauth2Client.generateAuthUrl({
 					    // 'online' (default) or 'offline' (gets refresh_token)
 					    access_type: 'offline',
@@ -174,7 +175,7 @@ function addToCalendar(id){
                        'timeZone': 'UTC+06:00'
                    },
                    'recurrence': [
-                       'RRULE:FREQ=WEEKLY;COUNT=12'
+                       'RRULE:FREQ=WEEKLY;UNTIL=20180501T170000Z'
                    ],
                    'reminders': {
                        'useDefault': true
@@ -270,7 +271,7 @@ function getLessons(name, res) {
             iteration++;
         });
         if(isValid) {
-        	saveToDatabase(id, result, res);
+        	saveToDatabase(id, result, res, name);
         }else {
         	console.log('not valid');
         	res.send("invalid file");	
