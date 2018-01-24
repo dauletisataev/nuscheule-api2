@@ -183,7 +183,7 @@ function addToCalendar(id){
                console.log(subject.startTime, subject.title, "-->", event.start.dateTime);
                calendar.events.insert({
                    auth: oauth2Client,
-                   calendarId: 'NU schedule',
+                   calendarId: 'primary',
                    resource: event,
                }, function(err, event) {
                		console.log('finished');
