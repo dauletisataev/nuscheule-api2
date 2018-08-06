@@ -11,14 +11,14 @@ var google = require('googleapis'),
     googleAuth = require('google-auth-library'),
     calendar= google.calendar("v3");
 
-app.use(upload()); 
-app.use(express.static(__dirname+'/public')); 
+app.use(upload());
+app.use(express.static(__dirname+'/public'));
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
 }
- 
+
 
 
 var config = {
@@ -51,13 +51,13 @@ app.post('/upload', function(req, res) {
 					console.log(err);
 					res.send("error occured");
 				}else{
-					getLessons(dir, res);				
+					getLessons(dir, res);
 				}
 			});
 		}else{
 			res.sendFile(path.join(__dirname+'/public/invalid-file.html'));
 		}
-		
+
 	}
 
 });
@@ -175,7 +175,7 @@ function addToCalendar(id){
                        'timeZone': 'UTC+06:00'
                    },
                    'recurrence': [
-                       'RRULE:FREQ=WEEKLY;UNTIL=20180501T170000Z'
+                       'RRULE:FREQ=WEEKLY;UNTIL=20190501T170000Z'
                    ],
                    'reminders': {
                        'useDefault': true
@@ -274,7 +274,7 @@ function getLessons(name, res) {
         	saveToDatabase(id, result, res, name);
         }else {
         	console.log('not valid');
-        	res.send("invalid file");	
+        	res.send("invalid file");
         }
     });
 
