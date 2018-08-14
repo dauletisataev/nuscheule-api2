@@ -119,7 +119,7 @@ function saveToDatabase(id, subjects, res, dir){
                         startTime: child[0],
                         endTime: child[1],
                         room: child[2],
-                        type: child[4],
+                        type: child[5],
                         title: child[3],
                         instructor: child[6]+child[7]
                     };
