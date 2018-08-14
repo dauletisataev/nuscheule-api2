@@ -89,14 +89,14 @@ app.get("/callback", function(req, res) {
 
 app.get("/getSchedule/:id", function(req, res){
 	var id = req.params.id;
-	var dataRef = firebase.database().ref().child("/").child(id);
+	var dataRef = firebase.database().ref().child("/schedules").child(id);
 	dataRef.once('value', function(snapshot){
 		res.send(snapshot.val());
 	});
 
 });
 function saveToDatabase(id, subjects, res, dir){
-    var dataRef = firebase.database().ref().child("/");
+    var dataRef = firebase.database().ref().child("/schedules");
 
 
 
@@ -152,7 +152,7 @@ function saveToDatabase(id, subjects, res, dir){
 
 function addToCalendar(id){
 	console.log("what the fuck maaan", id);
-    var dataRef = firebase.database().ref().child("/").child(id);
+    var dataRef = firebase.database().ref().child("/schedules").child(id);
     console.log("wait bro starting to add...");
     dataRef.once('value', function(snapshot){
     	console.log("got the data mann");
