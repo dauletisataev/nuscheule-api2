@@ -198,7 +198,7 @@ function addToCalendar(id){
                        'timeZone': 'UTC+06:00'
                    },
                    'recurrence': [
-                       'RRULE:FREQ=WEEKLY;UNTIL=20191122T170000Z'
+                       'RRULE:FREQ=WEEKLY;UNTIL=20200501T170000Z'
                    ],
                    'reminders': {
                        'useDefault': true
